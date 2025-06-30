@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/public.css' %}">
+    <title>Anonymous Tips</title>
+</head>
+
+<body class="a">
+    <h1 class="A">Public Anonymous Tips</h1>
+    <table border="1" class="b">
+        <tr class="c">
+            <th>Category</th>
+            <th>Urgency</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Submitted</th>
+            <th>Evidence</th>
+        </tr>
+        {% for tip in tips %}
+        <tr>
+            <td>{{ tip.category }}</td>
+            <td>{{ tip.urgency }}</td>
+            <td>{{ tip.location }}</td>
+            <td>{{ tip.description }}</td>
+            <td>{{ tip.submitted_at }}</td>
+            <td>
+                {% if tip.evidence %}
+                <form action="{% url 'download_evidence' tip.access_key %}" method="get">
+                    <input type="submit" value="Download Evidence (Need Key)">
+                </form>
+                {% else %}
+                No File
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
