@@ -1,6 +1,6 @@
 from .models import AnonymousTip
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse, FileResponse, HttpResponseForbidden
+from django.http import JsonResponse, FileResponse, HttpResponseForbidden, Http404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import AnonymousTipSerializer
@@ -63,7 +63,7 @@ def list_public_tips(request):
 
 def show_all_tips(request):
     tips = AnonymousTip.objects.all().order_by('-submitted_at')
-    return render(request, 'C:/Users/Ayush/backend/anonymous/first/templates/public.html', {'tips': tips})
+    return render(request, 'first/public.html', {'tips': tips})
 
 def download_evidence(request, access_key):
     try:
