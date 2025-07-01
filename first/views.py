@@ -19,7 +19,7 @@ def submit_anonymous_tip(request):
             evidence = request.FILES.get("evidence")
 
             # --- Limit and check file upload ---
-            MAX_UPLOAD_SIZE = 5 * 1024 * 1024  # 5MB
+            MAX_UPLOAD_SIZE = 100 * 1024 * 1024  # 100MB
             ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.pdf']
 
             if evidence:

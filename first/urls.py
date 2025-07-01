@@ -7,5 +7,5 @@ urlpatterns = [
     path('tips/', list_public_tips),
     path('tips-table/', show_all_tips, name='tips_table'),
     path('download-evidence/<uuid:access_key>/',download_evidence, name="download_evidence"),
-    path('',lambda request: HttpResponse("CONNECT TO FRONTEND"))
+    path('',lambda request: HttpResponse("404"))
 ]
