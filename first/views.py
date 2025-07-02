@@ -1,6 +1,6 @@
 from .models import AnonymousTip
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse, FileResponse, HttpResponseForbidden, Http404
+from django.http import JsonResponse, FileResponse, Http404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import AnonymousTipSerializer
@@ -20,7 +20,7 @@ def submit_anonymous_tip(request):
 
             # --- Limit and check file upload ---
             MAX_UPLOAD_SIZE = 100 * 1024 * 1024  # 100MB
-            ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.pdf']
+            ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.pdf','.mp4','.mp3']
 
             if evidence:
                 ext = os.path.splitext(evidence.name)[1].lower()
@@ -28,9 +28,8 @@ def submit_anonymous_tip(request):
                     return JsonResponse({"error": "❌ File type not allowed."}, status=400)
 
                 if evidence.size > MAX_UPLOAD_SIZE:
-                    return JsonResponse({"error": "❌ File too large. Max 5MB allowed."}, status=400)
+                    return JsonResponse({"error": "❌ File too large. Max 100MB allowed."}, status=400)
 
-            # --- Limit to 500 tips in DB ---
             MAX_TIPS = 500
             if AnonymousTip.objects.count() >= MAX_TIPS:
                 oldest = AnonymousTip.objects.earliest('submitted_at')

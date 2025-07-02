@@ -26,9 +26,26 @@
             <td>{{ tip.submitted_at }}</td>
             <td>
                 {% if tip.evidence %}
-                <form action="{% url 'download_evidence' tip.access_key %}" method="get">
-                    <input type="submit" value="Download Evidence (Need Key)">
+                <form action="{% url 'download_evidence' 'dummy-key' %}" method="get"
+                    onsubmit="return handleDownload(this, '{{ tip.access_key }}')">
+                    <input type="submit" value="Download Evidence (Enter Key)">
                 </form>
+                <script>
+                    function handleDownload(form, actualKey) {
+                        const userKey = prompt("Enter the access key:");
+
+                        if (userKey === null) return false; // User cancelled
+                        if (userKey !== actualKey) {
+                            alert("❌ Invalid key. Access denied.");
+                            return false;
+                        }
+
+                        
+                        form.action = `/download-evidence/${userKey}/`;
+                        return true;
+                    }
+                </script>
+
                 {% else %}
                 No File
                 {% endif %}
