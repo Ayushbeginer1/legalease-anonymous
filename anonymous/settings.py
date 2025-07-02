@@ -127,6 +127,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "https://nitesh4456.github.io",
+    "https://nitesh4456.github.io/"
 ]
 
 REST_FRAMEWORK = {
