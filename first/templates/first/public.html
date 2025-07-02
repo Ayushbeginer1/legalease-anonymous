@@ -26,7 +26,7 @@
             <td>{{ tip.submitted_at }}</td>
             <td>
                 {% if tip.evidence %}
-                <form action="{% url 'download_evidence' 'dummy-key' %}" method="get"
+                <form action="{% url 'download_evidence' tip access key %}" method="get"
                     onsubmit="return handleDownload(this, '{{ tip.access_key }}')">
                     <input type="submit" value="Download Evidence (Enter Key)">
                 </form>
